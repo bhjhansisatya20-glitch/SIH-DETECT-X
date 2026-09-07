@@ -123,7 +123,6 @@ if uploaded_file is not None:
     st.image(image, width=340, caption="Current Secure Cache Input Frame")
     st.markdown('</div>', unsafe_allow_html=True)
     
-    # Custom colored big action button using markdown fallback or default container styling
     if st.button("🚀 INITIATE MULTI-LEVEL INSPECTION MATRIX", use_container_width=True):
         st.write("<h3 style='color: #00ffcc !important;'>🛠️ PIPELINE PROCESSING LOGS</h3>", unsafe_allow_html=True)
         
@@ -173,11 +172,7 @@ if uploaded_file is not None:
             
             if "EMULATOR" in uploaded_file.name.upper() or "VIRTUAL" in uploaded_file.name.upper():
                 g4.update(label="❌ Gate 4 Breach: Virtual Environment Intercepted!", state="error")
-                st.error("""
-                **[SECURITY EXCEPTION: ACCESS REJECTED]**  
-                * **Gate 4 Verdict:** FAILED  
-                * **Threat Vector:** Active Emulator / Virtual Webcam Injection Attack. Pipeline aborted.
-                """)
+                st.error("[SECURITY EXCEPTION: ACCESS REJECTED] - Active Emulator / Virtual Webcam Injection Attack. Pipeline aborted.")
                 st.stop()
             else:
                 g4.update(label="✅ Gate 4 Complete: Physical Camera Driver Integrity Confirmed", state="complete", expanded=False)
@@ -196,8 +191,7 @@ if uploaded_file is not None:
         
         # --- FINAL PIPELINE VERDICT DECISION ---
         if "REAL" in extracted_text.upper() or "REAL" in uploaded_file.name.upper():
-            # Glowing Neon Green Success Panel
-            st.markdown(f"""
+            success_html = """
                 <div class="neon-success-box">
                     <h3 style="color:#10b981 !important; margin-top:0; text-shadow: 0 0 10px rgba(16,185,129,0.5);">🟢 [SYSTEM STATUS: ACCESS GRANTED]</h3>
                     <p style="font-weight: bold; margin-bottom: 10px;">The credential package has successfully cleared all five validation thresholds:</p>
@@ -209,8 +203,10 @@ if uploaded_file is not None:
                         <li><strong>Level 5 — Gate 5 (The Sanity Check):</strong> Passed. Encrypted records confirmed in official central registry ledger.</li>
                     </ul>
                 </div>
-            """, unsafe_allow_html=True)
+            """
+            st.markdown(success_html, unsafe_allow_html=True)
         else:
-            # Glowing Neon Red Failure Panel
-            st.markdown(f""
+            error_html = """
                 <div class="neon-error-box">
+                    <h3 style="color:#ef4444 !important; margin-top:0; text-shadow: 0 0 10px rgba(239,68,68,0.5);">🔴 [SYSTEM STATUS: SYNTHETIC FORGERY BLOCK]</h3>
+                    <p style="font-weight: bold; margin-bottom: 10px;">The credential package has failed central record verification protocols:</p>
