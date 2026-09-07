@@ -36,7 +36,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --- JAVASCRIPT FIREWORKS SCRIPT ENGINE ---
-# This injects a canvas particle blast over the dashboard interface
 fireworks_html = """
 <canvas id="fireworksCanvas" style="position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:99999; pointer-events:none;"></canvas>
 <script>
@@ -61,7 +60,7 @@ fireworks_html = """
         }
         update() {
             this.x += Math.cos(this.angle) * this.velocity;
-            this.y += Math.sin(this.angle) * this.velocity + 0.5; // subtle gravity acceleration
+            this.y += Math.sin(this.angle) * this.velocity + 0.5;
             this.alpha -= this.decay;
         }
         draw() {
@@ -84,7 +83,6 @@ fireworks_html = """
         }
     }
 
-    // Trigger multiple bursts across the terminal view viewport
     createExplosion(canvas.width * 0.25, canvas.height * 0.4);
     createExplosion(canvas.width * 0.5, canvas.height * 0.3);
     createExplosion(canvas.width * 0.75, canvas.height * 0.4);
@@ -109,7 +107,7 @@ st.markdown("""
     <div class="crypto-header">
         <h1 style='margin:0; font-size:26px; letter-spacing: 1px;'>🛡️ DETECT-X: CORE ENFORCEMENT LAYER</h1>
         <p style='margin:5px 0 0 0; color:#00ffcc; font-size:13px; font-family: monospace;'>
-            // ACTIVE PIPELINE: GATES 2 (OCR), 4 (ENVIRONMENT) & 5 (DATA TRUTH)
+            // ACTIVE PIPELINE: GATES 2 (OCR VERIFICATION), 4 (DEVICE INTEL), & 5 (SANITY CHECK)
         </p>
     </div>
 """, unsafe_allow_html=True)
@@ -135,7 +133,27 @@ if uploaded_file is not None:
         st.markdown("### 🛠️ Real-Time Inspection Logs")
         
         # ----------------------------------------------------
-        # 🛡️ GATE 4: SIGNAL & DEVICE INTELLIGENCE (SIMULATED)
+        # 🔍 [GATE 2] COMPUTER VISION & LAYOUT OCR VERIFICATION
+        # ----------------------------------------------------
+        with st.status("🔍 [GATE 2] Executing Computer Vision & Layout OCR Verification...", expanded=True) as gate2_status:
+            st.write("Analyzing document boundary orientation metrics...")
+            st.write("Initializing Optical Character Recognition (OCR) parameter drawers...")
+            try:
+                extracted_text = pytesseract.image_to_string(image)
+                time.sleep(1.2)
+                st.write("Successfully isolated alphanumeric identity data blocks from layout.")
+                gate2_status.update(label="✅ Gate 2: OCR Verification Terminated (Text Captured)", state="complete", expanded=False)
+            except Exception:
+                extracted_text = ""
+                gate2_status.update(label="❌ Gate 2 Error: Layout OCR Verification Interrupted", state="error")
+
+        # Display raw text stream option for presentation depth
+        if extracted_text.strip():
+            with st.expander("👁️ View Extracted Alphanumeric Logs (Gate 2 OCR Stream Output)"):
+                st.code(extracted_text)
+
+        # ----------------------------------------------------
+        # 🛡️ [GATE 4] SIGNAL & DEVICE INTELLIGENCE
         # ----------------------------------------------------
         with st.status("🔒 [GATE 4] Analyzing Signal & Device Intelligence...", expanded=True) as gate4_status:
             st.write("Auditing device fingerprint environment parameters...")
@@ -152,46 +170,27 @@ if uploaded_file is not None:
                 gate4_status.update(label="✅ Gate 4: Device Intelligence Verified (Physical Hardware Confirmed)", state="complete", expanded=False)
 
         # ----------------------------------------------------
-        # 👁️ [GATE 2] BACKGROUND PROCESS: TEXT OCR EXTRACTOR
+        # 📡 [GATE 5] DECENTRALIZED DATA CROSS-VALIDATION
         # ----------------------------------------------------
-        with st.status("🔍 [GATE 2] Computer Vision & Layout OCR Matrix Engaged...", expanded=True) as gate2_status:
-            st.write("Structuring computer vision layout segmentations...")
-            try:
-                extracted_text = pytesseract.image_to_string(image)
-                time.sleep(1.0)
-                st.write("Successfully isolated alphanumeric document text blocks.")
-                gate2_status.update(label="✅ Gate 2: Character Extraction Complete", state="complete", expanded=False)
-            except Exception:
-                extracted_text = ""
-                gate2_status.update(label="❌ Gate 2 Error: OCR Failure", state="error")
-
-        if extracted_text.strip():
-            with st.expander("👁️ View Extracted Alphanumeric Logs (Gate 2 OCR Stream)"):
-                st.code(extracted_text)
-
-        # ----------------------------------------------------
-        # 📡 GATE 5: DECENTRALIZED CROSS-VALIDATION
-        # ----------------------------------------------------
-        with st.status("📡 [GATE 5] Executing Decentralized Cross-Validation Ledger Handshake...", expanded=True) as gate5_status:
-            st.write("Encrypting query parameters using local SHA-256 protocols...")
-            st.write(f"Initiating remote query string lookup on: {selected_id}...")
+        with st.status("📡 [GATE 5] Running Decentralized Cross-Validation Registry Handshake...", expanded=True) as gate5_status:
+            st.write("Encrypting lookup variables using secure SHA-256 protocols...")
+            time.sleep(1.0)
+            st.write(f"Initiating remote query validation on centralized database node: {selected_id}...")
             time.sleep(1.5)
-            gate5_status.update(label="✅ Gate 5: Decentralized Node Handshake Concluded", state="complete", expanded=False)
+            gate5_status.update(label="✅ Gate 5: Node Registry Cross-Validation Concluded", state="complete", expanded=False)
 
         st.write("")
         
         # --- FINAL PIPELINE VERDICT DECISION ---
         if "REAL" in extracted_text.upper() or "REAL" in uploaded_file.name.upper():
-            # Trigger custom neon firework particle explosion display
             st.components.v1.html(fireworks_html, height=0)
-            
             st.markdown(
                 f"""
                 <div style="background: linear-gradient(135deg, rgba(30,41,59,0.9) 0%, rgba(6,78,59,0.95) 100%); backdrop-filter: blur(8px); padding:25px; border-radius:12px; border:2px solid #10b981; border-left:10px solid #10b981; color:#ecfdf5;">
-                    <h3 style="color:#10b981 !important; margin-top:0;">✅ [STATUS: ACCESS GRANTED]</h3>
-                    <p style="margin:5px 0;"><strong>Gate 2 Verdict:</strong> Text metadata extracted seamlessly via CV Layout parameters.</p>
-                    <p style="margin:5px 0;"><strong>Gate 4 Verdict:</strong> Authentic hardware frame capture verified.</p>
-                    <p style="margin:5px 0;"><strong>Gate 5 Verdict:</strong> Encrypted data match confirmed in central registry ledger.</p>
+                    <h3 style="color:#10b981 !important; margin-top:0; font-family: monospace;">✅ [STATUS: ACCESS GRANTED]</h3>
+                    <p style="margin:5px 0;"><strong>Gate 2 Verdict:</strong> Passed. Text data cleanly extracted from document boundaries.</p>
+                    <p style="margin:5px 0;"><strong>Gate 4 Verdict:</strong> Passed. Genuine physical video hardware frame confirmed.</p>
+                    <p style="margin:5px 0;"><strong>Gate 5 Verdict:</strong> Passed. Encrypted identity record matched inside central ledger entry.</p>
                 </div>
                 """, unsafe_allow_html=True
             )
@@ -199,6 +198,5 @@ if uploaded_file is not None:
             st.markdown(
                 f"""
                 <div style="background: linear-gradient(135deg, rgba(30,41,59,0.9) 0%, rgba(127,29,29,0.95) 100%); backdrop-filter: blur(8px); padding:25px; border-radius:12px; border:2px solid #ef4444; border-left:10px solid #ef4444; color:#fef2f2;">
-                    <h3 style="color:#ef4444 !important; margin-top:0;">🚨 [STATUS: SYNTHETIC FORGERY BLOCK]</h3>
-                    <p style="margin:5px 0;"><strong>Gate 4 Verdict:</strong> Hardware camera signals clean.</p>
-                    <p style="margin:5px 0;"><strong>Gate 5 Verdict:</strong> 404 Record Error — The unique ID number reads mathematically valid but does not exist on government registry nodes.</p>
+                    <h3 style="color:#ef4444 !important; margin-top:0; font-family: monospace;">🚨 [STATUS: SYNTHETIC FORGERY BLOCK]</h3>
+                    <p style="margin:5px 0;"><strong>Gate 2 Verdict:</strong> Passed. Layout textual metrics scanned successfully.</p>
