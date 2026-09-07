@@ -212,5 +212,5 @@ if uploaded_file is not None:
             """, unsafe_allow_html=True)
         else:
             # Glowing Neon Red Failure Panel
-            st.markdown(f"""
+            st.markdown(f""
                 <div class="neon-error-box">
