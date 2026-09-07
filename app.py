@@ -5,39 +5,80 @@ import time
 
 # --- STYLING CONFIGURATION ---
 st.set_page_config(
-    page_title="SIH 2026 | 5-Level Security Terminal", 
+    page_title="SIH 2026 | DETECT-X Cyber Terminal", 
     page_icon="🛡️", 
     layout="centered"
 )
 
-# Premium terminal theme styling using native, error-free container boundaries
+# Custom CSS for Neon Cyberpunk Aesthetics
 st.markdown("""
     <style>
+    /* Dark Cyberpunk Mesh Background */
     .stApp {
-        background-color: #06090e;
+        background-color: #060913;
         background-image: 
-            linear-gradient(rgba(0, 255, 204, 0.02) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0, 255, 204, 0.02) 1px, transparent 1px);
-        background-size: 25px 25px;
+            linear-gradient(rgba(0, 255, 204, 0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 255, 204, 0.04) 1px, transparent 1px);
+        background-size: 30px 30px;
     }
-    h1, h2, h3 { color: #00ffcc !important; font-family: monospace; letter-spacing: 0.5px; }
-    .stSelectbox label, .stFileUploader label { color: #ffffff !important; font-weight: bold; font-size: 14px; }
     
-    /* Premium frosted dashboard card styling */
+    /* Glowing Titles */
+    h1, h2, h3 { 
+        font-family: 'Courier New', Courier, monospace; 
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+    
+    .stSelectbox label, .stFileUploader label { 
+        color: #00ffcc !important; 
+        font-weight: bold; 
+        font-size: 14px;
+        text-shadow: 0 0 5px rgba(0, 255, 204, 0.3);
+    }
+    
+    /* Neon Cyan Header Card */
     .dashboard-header {
-        background-color: #161b22;
+        background: linear-gradient(135deg, #0f172a 0%, #1e1e38 100%);
         padding: 24px;
         border-radius: 12px;
-        border: 1px solid #30363d;
-        border-left: 6px solid #00ffcc;
+        border: 2px solid #00ffcc;
+        border-left: 10px solid #00ffcc;
         margin-bottom: 25px;
+        box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
     }
+    
+    /* Neon Purple Input Card */
     .panel-card {
-        background-color: #0d1117;
+        background-color: #0b0f19;
         padding: 20px;
         border-radius: 10px;
-        border: 1px solid #21262d;
+        border: 2px solid #bc34fa;
         margin-bottom: 20px;
+        box-shadow: 0 0 15px rgba(188, 52, 250, 0.2);
+    }
+    
+    /* Custom Neon Green Success Card Wrapper */
+    .neon-success-box {
+        background: linear-gradient(135deg, #0b141a 0%, #062b1a 100%);
+        padding: 25px;
+        border-radius: 12px;
+        border: 2px solid #10b981;
+        border-left: 10px solid #10b981;
+        color: #e6fbf3;
+        box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
+        margin-top: 15px;
+    }
+    
+    /* Custom Neon Red Error Card Wrapper */
+    .neon-error-box {
+        background: linear-gradient(135deg, #1a0f12 0%, #4c1117 100%);
+        padding: 25px;
+        border-radius: 12px;
+        border: 2px solid #ef4444;
+        border-left: 10px solid #ef4444;
+        color: #fef2f2;
+        box-shadow: 0 0 25px rgba(239, 68, 68, 0.4);
+        margin-top: 15px;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -45,18 +86,17 @@ st.markdown("""
 # --- PANEL HEADER ---
 st.markdown("""
     <div class="dashboard-header">
-        <h1 style='margin:0; font-size:26px;'>🛡️ DETECT-X: ENFORCEMENT TERMINAL</h1>
+        <h1 style='margin:0; font-size:26px; color: #00ffcc !important; text-shadow: 0 0 10px rgba(0,255,204,0.5);'>🛡️ DETECT-X: PROTOCOL TERMINAL</h1>
         <p style='margin:5px 0 0 0; color:#8b949e; font-size:13px; font-family: monospace;'>
-            // AUTHENTICATION PROTOCOL LAYER // GATES 1 - 5 STATUS MONITOR
+            // ACTIVE PIPELINE // GATES 1 - 5 SECURE VERIFICATION SUITE
         </p>
     </div>
 """, unsafe_allow_html=True)
 
 # --- SYSTEM INITIALIZATION MATRIX ---
 st.markdown('<div class="panel-card">', unsafe_allow_html=True)
-st.write("### 📡 PIPELINE INITIALIZATION")
+st.write("<h3 style='color: #bc34fa !important; text-shadow: 0 0 8px rgba(188,52,250,0.4);'>📡 PIPELINE INITIALIZATION</h3>", unsafe_allow_html=True)
 
-# Using columns to create a balanced, appealing setup section
 col1, col2 = st.columns(2)
 
 with col1:
@@ -78,14 +118,14 @@ st.markdown('</div>', unsafe_allow_html=True)
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
     
-    # Render the input file neatly inside a centered, styled container
     st.markdown('<div class="panel-card">', unsafe_allow_html=True)
-    st.write("### 📷 INPUT FEED STREAM")
+    st.write("<h3 style='color: #bc34fa !important; text-shadow: 0 0 8px rgba(188,52,250,0.4);'>📷 INPUT FEED STREAM</h3>", unsafe_allow_html=True)
     st.image(image, width=340, caption="Current Secure Cache Input Frame")
     st.markdown('</div>', unsafe_allow_html=True)
     
+    # Custom colored big action button using markdown fallback or default container styling
     if st.button("🚀 INITIATE MULTI-LEVEL INSPECTION MATRIX", use_container_width=True):
-        st.write("### 🛠️ PIPELINE PROCESSING LOGS")
+        st.write("<h3 style='color: #00ffcc !important;'>🛠️ PIPELINE PROCESSING LOGS</h3>", unsafe_allow_html=True)
         
         # ----------------------------------------------------
         # [GATE 1] VISUAL TAMPERING & DEEPFAKE DETECTION
@@ -156,23 +196,21 @@ if uploaded_file is not None:
         
         # --- FINAL PIPELINE VERDICT DECISION ---
         if "REAL" in extracted_text.upper() or "REAL" in uploaded_file.name.upper():
-            st.success("""
-            ### 🎉 [SYSTEM STATUS: ACCESS GRANTED]
-            
-            The credential package has successfully cleared all five validation thresholds:
-            * **Level 1 — Gate 1 (Visual Forensics):** Passed. Zero pixel texture anomalies or deepfakes detected.
-            * **Level 2 — Gate 2 (OCR Character Engine):** Passed. Text fields pulled successfully from boundaries.
-            * **Level 3 — Gate 3 (Face Liveness Matrix):** Passed. Real-time human biometric match verified.
-            * **Level 4 — Gate 4 (Device Intel Node):** Passed. True physical video hardware channel validated.
-            * **Level 5 — Gate 5 (The Sanity Check):** Passed. Encrypted records confirmed in official central registry ledger.
-            """)
+            # Glowing Neon Green Success Panel
+            st.markdown(f"""
+                <div class="neon-success-box">
+                    <h3 style="color:#10b981 !important; margin-top:0; text-shadow: 0 0 10px rgba(16,185,129,0.5);">🟢 [SYSTEM STATUS: ACCESS GRANTED]</h3>
+                    <p style="font-weight: bold; margin-bottom: 10px;">The credential package has successfully cleared all five validation thresholds:</p>
+                    <ul style="margin: 0; padding-left: 20px;">
+                        <li><strong>Level 1 — Gate 1 (Visual Forensics):</strong> Passed. Zero pixel texture anomalies or deepfakes detected.</li>
+                        <li><strong>Level 2 — Gate 2 (OCR Character Engine):</strong> Passed. Text fields pulled successfully from boundaries.</li>
+                        <li><strong>Level 3 — Gate 3 (Face Liveness Matrix):</strong> Passed. Real-time human biometric match verified.</li>
+                        <li><strong>Level 4 — Gate 4 (Device Intel Node):</strong> Passed. True physical video hardware channel validated.</li>
+                        <li><strong>Level 5 — Gate 5 (The Sanity Check):</strong> Passed. Encrypted records confirmed in official central registry ledger.</li>
+                    </ul>
+                </div>
+            """, unsafe_allow_html=True)
         else:
-            st.error("""
-            ### 🚨 [SYSTEM STATUS: SYNTHETIC FORGERY BLOCK]
-            
-            The credential package has failed central record verification protocols:
-            * **Environment Status (Gates 1, 2, 3, 4):** Passed layout integrity and system hardware checks.
-            * **Data Validation Status (Gate 5 Registry):** Failed (404 Error). The unique identity string does not exist in any registered sovereign node ledger.
-            
-            **Threat Assessment:** High Risk. Target file flagged as an AI-Generated Synthetic Document Clone. Access Denied.
-            """)
+            # Glowing Neon Red Failure Panel
+            st.markdown(f"""
+                <div class="neon-error-box">
