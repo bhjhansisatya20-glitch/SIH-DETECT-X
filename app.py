@@ -35,46 +35,32 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- GLOBAL PARENT CANVAS FIREWORKS INJECTOR ---
-# Escapes the iframe to draw the particles directly across the browser window viewport.
+# --- JAVASCRIPT FIREWORKS SCRIPT ENGINE ---
 fireworks_html = """
-<div style="display:none;">
-<iframe src="javascript:
-    var doc = window.parent.document;
-    var canvas = doc.getElementById('globalFireworksCanvas');
-    if (!canvas) {
-        canvas = doc.createElement('canvas');
-        canvas.id = 'globalFireworksCanvas';
-        canvas.style.position = 'fixed';
-        canvas.style.top = '0';
-        canvas.style.left = '0';
-        canvas.style.width = '100vw';
-        canvas.style.height = '100vh';
-        canvas.style.zIndex = '99999';
-        canvas.style.pointerEvents = 'none';
-        doc.body.appendChild(canvas);
-    }
-    var ctx = canvas.getContext('2d');
-    canvas.width = window.parent.innerWidth;
-    canvas.height = window.parent.innerHeight;
-    
-    var particles = [];
-    var colors = ['#00ffcc', '#10b981', '#3b82f6', '#f43f5e', '#eab308'];
-    
+<canvas id="fireworksCanvas" style="position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:99999; pointer-events:none;"></canvas>
+<script>
+    const canvas = document.getElementById('fireworksCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles = [];
+    const colors = ['#00ffcc', '#10b981', '#3b82f6', '#f43f5e', '#eab308'];
+
     class Particle {
         constructor(x, y, color) {
             this.x = x;
             this.y = y;
             this.color = color;
-            this.radius = Math.random() * 4 + 1;
+            this.radius = Math.random() * 3 + 1;
             this.angle = Math.random() * Math.PI * 2;
-            this.velocity = Math.random() * 7 + 3;
+            this.velocity = Math.random() * 6 + 2;
             this.alpha = 1;
             this.decay = Math.random() * 0.02 + 0.015;
         }
         update() {
             this.x += Math.cos(this.angle) * this.velocity;
-            this.y += Math.sin(this.angle) * this.velocity + 0.4;
+            this.y += Math.sin(this.angle) * this.velocity + 0.5;
             this.alpha -= this.decay;
         }
         draw() {
@@ -83,35 +69,37 @@ fireworks_html = """
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
             ctx.fillStyle = this.color;
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = this.color;
             ctx.fill();
             ctx.restore();
         }
     }
-    
-    function burst(x, y) {
-        var color = colors[Math.floor(Math.random() * colors.length)];
-        for (var i = 0; i < 70; i++) {
+
+    function createExplosion(x, y) {
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        for (let i = 0; i < 60; i++) {
             particles.push(new Particle(x, y, color));
         }
     }
-    
-    burst(canvas.width * 0.25, canvas.height * 0.35);
-    burst(canvas.width * 0.5, canvas.height * 0.25);
-    burst(canvas.width * 0.75, canvas.height * 0.35);
-    
-    function frame() {
+
+    createExplosion(canvas.width * 0.25, canvas.height * 0.4);
+    createExplosion(canvas.width * 0.5, canvas.height * 0.3);
+    createExplosion(canvas.width * 0.75, canvas.height * 0.4);
+
+    function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         particles = particles.filter(p => p.alpha > 0);
-        particles.forEach(p => { p.update(); p.draw(); });
+        particles.forEach(p => {
+            p.update();
+            p.draw();
+        });
         if (particles.length > 0) {
-            window.parent.requestAnimationFrame(frame);
-        } else {
-            canvas.remove();
+            requestAnimationFrame(animate);
         }
     }
-    frame();
-"/>
-</div>
+    animate();
+</script>
 """
 
 # --- HEADER ---
@@ -186,11 +174,9 @@ if uploaded_file is not None:
 
         st.write("")
         
-                
         # --- FINAL PIPELINE VERDICT DECISION ---
         if "REAL" in extracted_text.upper() or "REAL" in uploaded_file.name.upper():
-            # Injecting global scope fireworks display
-            st.markdown(fireworks_html, unsafe_allow_html=True)
+            st.components.v1.html(fireworks_html, height=0)
             success_card = f"""
             <div style="background: linear-gradient(135deg, rgba(30,41,59,0.9) 0%, rgba(6,78,59,0.95) 100%); backdrop-filter: blur(8px); padding:25px; border-radius:12px; border:2px solid #10b981; border-left:10px solid #10b981; color:#ecfdf5;">
                 <h3 style="color:#10b981 !important; margin-top:0; font-family: monospace;">[STATUS: ACCESS GRANTED]</h3>
@@ -206,3 +192,8 @@ if uploaded_file is not None:
                 <h3 style="color:#ef4444 !important; margin-top:0; font-family: monospace;">[STATUS: SYNTHETIC FORGERY BLOCK]</h3>
                 <p style="margin:5px 0;"><strong>Gate 2 Verdict:</strong> Passed. Layout textual metrics scanned successfully.</p>
                 <p style="margin:5px 0;"><strong>Gate 4 Verdict:</strong> Passed. Device environmental signals are secure.</p>
+                <p style="margin:5px 0;"><strong>Gate 5 Verdict:</strong> Failed (404 Error). The unique identity string does not exist in any registered sovereign node ledger.</p>
+                <p style="margin:5px 0; color:#fca5a5; font-size:13px; border-top: 1px solid rgba(239,68,68,0.3); padding-top:5px; margin-top:5px;"><strong>Threat Assessment:</strong> Profile flagged as an AI-Generated Synthetic Document Clone.</p>
+            </div>
+            """
+            st.markdown(alert_card, unsafe_allow_html=True)
