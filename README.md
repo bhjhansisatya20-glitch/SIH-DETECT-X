@@ -2,7 +2,7 @@
 
 An automated, decentralized zero-trust pipeline engineered for the **Smart India Hackathon (SIH)**. This security engine intercepts visually flawless, AI-generated synthetic document clones by evaluating both device-level integrity and sovereign data registry records.
 
-Live Prototype Url: *[PASTE YOUR STREAMLIT WEBLINK HERE]*
+Live Prototype Url: *[https://sih-gate-5-dej4vrut4moplrmzyj9juv.streamlit.app/]*
 
 ---
 
