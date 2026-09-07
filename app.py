@@ -186,9 +186,7 @@ if uploaded_file is not None:
 
         st.write("")
         
-                    # Guaranteed fallback: Triggers a native system particle stream waterfall over your dark grid
-            st.snow()
-
+                
         # --- FINAL PIPELINE VERDICT DECISION ---
         if "REAL" in extracted_text.upper() or "REAL" in uploaded_file.name.upper():
             # Injecting global scope fireworks display
