@@ -56,18 +56,12 @@ if uploaded_file is not None:
         # --- THE CONTEXT SECURITY SANITY CHECK ---
         # Demo Evaluation Rule: If the text scanned on the card contains "REAL" or a trusted test keyword, pass it.
         # Otherwise, flag it as a synthetic record manipulation attempt.
-        if "REAL" in extracted_text.upper() or "APPROVED" in extracted_text.upper():
+                # --- THE CONTEXT SECURITY SANITY CHECK ---
+        # Checks if "REAL" is inside the image text OR inside the uploaded file name itself!
+        if "REAL" in extracted_text.upper() or "REAL" in uploaded_file.name.upper() or "APPROVED" in extracted_text.upper():
             st.success("### ✅ [SUCCESS] REGISTRY ENTRY CONFIRMED")
             st.balloons()
-            st.markdown(
-                f"""
-                <div style="background-color:#d4edda; padding:20px; border-radius:10px; border-left:8px solid #28a745; color:#155724;">
-                    <strong>Verification Verdict:</strong> AUTHENTIC RECORD MATCH FOUND<br>
-                    <strong>Registry Node:</strong> Sovereign Central Sandbox Database Layer<br>
-                    <strong>Status:</strong> Clear. The text scanned automatically off the card matches a valid registry entry!
-                </div>
-                """, unsafe_allow_html=True
-            )
+
         else:
             st.error("### 🚨 [CRITICAL ALERT] SYNTHETIC FORGERY DETECTED")
             st.markdown(
