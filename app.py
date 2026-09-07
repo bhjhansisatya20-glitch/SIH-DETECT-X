@@ -175,8 +175,10 @@ if uploaded_file is not None:
         st.write("")
         
         # --- FINAL PIPELINE VERDICT DECISION ---
-        if "REAL" in extracted_text.upper() or "REAL" in uploaded_file.name.upper():
-            st.components.v1.html(fireworks_html, height=0)
+                # --- FINAL PIPELINE VERDICT DECISION ---
+        # Forces a successful token verification pass if 'REAL' is anywhere in the file name
+        if "REAL" in uploaded_file.name.upper() or "REAL" in extracted_text.upper():
+            st.markdown(fireworks_html, unsafe_allow_html=True)
             success_card = f"""
             <div style="background: linear-gradient(135deg, rgba(30,41,59,0.9) 0%, rgba(6,78,59,0.95) 100%); backdrop-filter: blur(8px); padding:25px; border-radius:12px; border:2px solid #10b981; border-left:10px solid #10b981; color:#ecfdf5;">
                 <h3 style="color:#10b981 !important; margin-top:0; font-family: monospace;">[STATUS: ACCESS GRANTED]</h3>
@@ -186,6 +188,7 @@ if uploaded_file is not None:
             </div>
             """
             st.markdown(success_card, unsafe_allow_html=True)
+
         else:
             alert_card = f"""
             <div style="background: linear-gradient(135deg, rgba(30,41,59,0.9) 0%, rgba(127,29,29,0.95) 100%); backdrop-filter: blur(8px); padding:25px; border-radius:12px; border:2px solid #ef4444; border-left:10px solid #ef4444; color:#fef2f2;">
