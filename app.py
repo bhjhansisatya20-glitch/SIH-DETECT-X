@@ -132,12 +132,10 @@ if uploaded_file is not None:
     if st.button("INITIATE MULTI-GATEWAY INSPECTION MATRIX", use_container_width=True):
         st.markdown("### Real-Time Inspection Logs")
         
-        # ----------------------------------------------------
         # [GATE 2] COMPUTER VISION & LAYOUT OCR VERIFICATION
-        # ----------------------------------------------------
         with st.status("Core Processing: Running Gate 2 OCR Layout Verification...", expanded=True) as gate2_status:
             st.write("Analyzing document boundary orientation metrics...")
-            st.write("Initializing Character Extraction parameter drawers...")
+            st.write("Initializing Character Extraction parameters...")
             try:
                 extracted_text = pytesseract.image_to_string(image)
                 time.sleep(1.2)
@@ -147,14 +145,11 @@ if uploaded_file is not None:
                 extracted_text = ""
                 gate2_status.update(label="Gate 2 Error: Layout OCR Verification Interrupted", state="error")
 
-        # Display raw text stream option for presentation depth
         if extracted_text.strip():
             with st.expander("View Extracted Alphanumeric Logs (Gate 2 OCR Stream Output)"):
                 st.code(extracted_text)
 
-        # ----------------------------------------------------
         # [GATE 4] SIGNAL & DEVICE INTELLIGENCE
-        # ----------------------------------------------------
         with st.status("Core Processing: Running Gate 4 Signal and Device Audits...", expanded=True) as gate4_status:
             st.write("Auditing device fingerprint environment parameters...")
             time.sleep(1.0)
@@ -164,14 +159,12 @@ if uploaded_file is not None:
             
             if "EMULATOR" in uploaded_file.name.upper() or "VIRTUAL" in uploaded_file.name.upper():
                 gate4_status.update(label="Gate 4 Breach: Virtual Camera / Emulator Cam Detected!", state="error")
-                st.error("🚨 **[GATE 4 FAILURE] BOUNDARY VIOLATION:** This device stream is originating from a phone emulator or virtual camera injection tool. Pipeline execution halted immediately.")
+                st.error("🚨 [GATE 4 FAILURE] BOUNDARY VIOLATION: Virtual device layer intercepted.")
                 st.stop()
             else:
-                gate4_status.update(label="Gate 4: Device Intelligence Verified (Physical Hardware Confirmed)", state="complete", expanded=False)
+                gate4_status.update(label="Gate 4: Device Intelligence Verified (Hardware Confirmed)", state="complete", expanded=False)
 
-        # ----------------------------------------------------
         # [GATE 5] DECENTRALIZED DATA CROSS-VALIDATION
-        # ----------------------------------------------------
         with st.status("Core Processing: Running Gate 5 Decentralized Cross-Validation...", expanded=True) as gate5_status:
             st.write("Encrypting lookup variables using secure SHA-256 protocols...")
             time.sleep(1.0)
@@ -184,20 +177,23 @@ if uploaded_file is not None:
         # --- FINAL PIPELINE VERDICT DECISION ---
         if "REAL" in extracted_text.upper() or "REAL" in uploaded_file.name.upper():
             st.components.v1.html(fireworks_html, height=0)
-            st.markdown(
-                f""
-                <div style="background: linear-gradient(135deg, rgba(30,41,59,0.9) 0%, rgba(6,78,59,0.95) 100%); backdrop-filter: blur(8px); padding:25px; border-radius:12px; border:2px solid #10b981; border-left:10px solid #10b981; color:#ecfdf5;">
-                    <h3 style="color:#10b981 !important; margin-top:0; font-family: monospace;">[STATUS: ACCESS GRANTED]</h3>
-                    <p style="margin:5px 0;"><strong>Gate 2 Verdict:</strong> Passed. Text data cleanly extracted from document boundaries.</p>
-                    <p style="margin:5px 0;"><strong>Gate 4 Verdict:</strong> Passed. Genuine physical video hardware frame confirmed.</p>
-                    <p style="margin:5px 0;"><strong>Gate 5 Verdict:</strong> Passed. Encrypted identity record matched inside central ledger entry.</p>
-                </div>
-                """, unsafe_allow_html=True
-            )
+            success_card = f"""
+            <div style="background: linear-gradient(135deg, rgba(30,41,59,0.9) 0%, rgba(6,78,59,0.95) 100%); backdrop-filter: blur(8px); padding:25px; border-radius:12px; border:2px solid #10b981; border-left:10px solid #10b981; color:#ecfdf5;">
+                <h3 style="color:#10b981 !important; margin-top:0; font-family: monospace;">[STATUS: ACCESS GRANTED]</h3>
+                <p style="margin:5px 0;"><strong>Gate 2 Verdict:</strong> Passed. Text data cleanly extracted from document boundaries.</p>
+                <p style="margin:5px 0;"><strong>Gate 4 Verdict:</strong> Passed. Genuine physical video hardware frame confirmed.</p>
+                <p style="margin:5px 0;"><strong>Gate 5 Verdict:</strong> Passed. Encrypted identity record matched inside central ledger entry.</p>
+            </div>
+            """
+            st.markdown(success_card, unsafe_allow_html=True)
         else:
-            st.markdown(
-                f"""
-                <div style="background: linear-gradient(135deg, rgba(30,41,59,0.9) 0%, rgba(127,29,29,0.95) 100%); backdrop-filter: blur(8px); padding:25px; border-radius:12px; border:2px solid #ef4444; border-left:10px solid #ef4444; color:#fef2f2;">
-                    <h3 style="color:#ef4444 !important; margin-top:0; font-family: monospace;">[STATUS: SYNTHETIC FORGERY BLOCK]</h3>
-                    <p style="margin:5px 0;"><strong>Gate 2 Verdict:</strong> Passed. Layout textual metrics scanned successfully.</p>
-                    <p style="margin:5px 0;"><strong>Gate 4 Verdict:</strong> Passed. Device environmental signals are secure.</p>
+            alert_card = f"""
+            <div style="background: linear-gradient(135deg, rgba(30,41,59,0.9) 0%, rgba(127,29,29,0.95) 100%); backdrop-filter: blur(8px); padding:25px; border-radius:12px; border:2px solid #ef4444; border-left:10px solid #ef4444; color:#fef2f2;">
+                <h3 style="color:#ef4444 !important; margin-top:0; font-family: monospace;">[STATUS: SYNTHETIC FORGERY BLOCK]</h3>
+                <p style="margin:5px 0;"><strong>Gate 2 Verdict:</strong> Passed. Layout textual metrics scanned successfully.</p>
+                <p style="margin:5px 0;"><strong>Gate 4 Verdict:</strong> Passed. Device environmental signals are secure.</p>
+                <p style="margin:5px 0;"><strong>Gate 5 Verdict:</strong> Failed (404 Error). The unique identity string does not exist in any registered sovereign node ledger.</p>
+                <p style="margin:5px 0; color:#fca5a5; font-size:13px; border-top: 1px solid rgba(239,68,68,0.3); padding-top:5px; margin-top:5px;"><strong>Threat Assessment:</strong> Profile flagged as an AI-Generated Synthetic Document Clone.</p>
+            </div>
+            """
+            st.markdown(alert_card, unsafe_allow_html=True)
