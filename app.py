@@ -105,7 +105,7 @@ fireworks_html = """
 # --- HEADER ---
 st.markdown("""
     <div class="crypto-header">
-        <h1 style='margin:0; font-size:26px; letter-spacing: 1px;'>🛡️ DETECT-X: CORE ENFORCEMENT LAYER</h1>
+        <h1 style='margin:0; font-size:26px; letter-spacing: 1px;'>DETECT-X: CORE ENFORCEMENT LAYER</h1>
         <p style='margin:5px 0 0 0; color:#00ffcc; font-size:13px; font-family: monospace;'>
             // ACTIVE PIPELINE: GATES 2 (OCR VERIFICATION), 4 (DEVICE INTEL), & 5 (SANITY CHECK)
         </p>
@@ -126,36 +126,36 @@ st.markdown('</div>', unsafe_allow_html=True)
 # --- VERIFICATION TRIGGER ---
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
-    st.markdown("### 📷 Captured Upload Frame Stream")
+    st.markdown("### Document Input Frame Stream")
     st.image(image, width=320)
     
-    if st.button("🚀 INITIATE MULTI-GATEWAY INSPECTION MATRIX", use_container_width=True):
-        st.markdown("### 🛠️ Real-Time Inspection Logs")
+    if st.button("INITIATE MULTI-GATEWAY INSPECTION MATRIX", use_container_width=True):
+        st.markdown("### Real-Time Inspection Logs")
         
         # ----------------------------------------------------
-        # 🔍 [GATE 2] COMPUTER VISION & LAYOUT OCR VERIFICATION
+        # [GATE 2] COMPUTER VISION & LAYOUT OCR VERIFICATION
         # ----------------------------------------------------
-        with st.status("🔍 [GATE 2] Executing Computer Vision & Layout OCR Verification...", expanded=True) as gate2_status:
+        with st.status("Core Processing: Running Gate 2 OCR Layout Verification...", expanded=True) as gate2_status:
             st.write("Analyzing document boundary orientation metrics...")
-            st.write("Initializing Optical Character Recognition (OCR) parameter drawers...")
+            st.write("Initializing Character Extraction parameter drawers...")
             try:
                 extracted_text = pytesseract.image_to_string(image)
                 time.sleep(1.2)
                 st.write("Successfully isolated alphanumeric identity data blocks from layout.")
-                gate2_status.update(label="✅ Gate 2: OCR Verification Terminated (Text Captured)", state="complete", expanded=False)
+                gate2_status.update(label="Gate 2 Matrix Terminated (Text Captured)", state="complete", expanded=False)
             except Exception:
                 extracted_text = ""
-                gate2_status.update(label="❌ Gate 2 Error: Layout OCR Verification Interrupted", state="error")
+                gate2_status.update(label="Gate 2 Error: Layout OCR Verification Interrupted", state="error")
 
         # Display raw text stream option for presentation depth
         if extracted_text.strip():
-            with st.expander("👁️ View Extracted Alphanumeric Logs (Gate 2 OCR Stream Output)"):
+            with st.expander("View Extracted Alphanumeric Logs (Gate 2 OCR Stream Output)"):
                 st.code(extracted_text)
 
         # ----------------------------------------------------
-        # 🛡️ [GATE 4] SIGNAL & DEVICE INTELLIGENCE
+        # [GATE 4] SIGNAL & DEVICE INTELLIGENCE
         # ----------------------------------------------------
-        with st.status("🔒 [GATE 4] Analyzing Signal & Device Intelligence...", expanded=True) as gate4_status:
+        with st.status("Core Processing: Running Gate 4 Signal and Device Audits...", expanded=True) as gate4_status:
             st.write("Auditing device fingerprint environment parameters...")
             time.sleep(1.0)
             st.write("Checking WebRTC video stream attributes for injection signatures...")
@@ -163,21 +163,21 @@ if uploaded_file is not None:
             st.write("Verifying camera driver hardware integrity bounds...")
             
             if "EMULATOR" in uploaded_file.name.upper() or "VIRTUAL" in uploaded_file.name.upper():
-                gate4_status.update(label="❌ Gate 4 Breach: Virtual Camera / Emulator Cam Detected!", state="error")
+                gate4_status.update(label="Gate 4 Breach: Virtual Camera / Emulator Cam Detected!", state="error")
                 st.error("🚨 **[GATE 4 FAILURE] BOUNDARY VIOLATION:** This device stream is originating from a phone emulator or virtual camera injection tool. Pipeline execution halted immediately.")
                 st.stop()
             else:
-                gate4_status.update(label="✅ Gate 4: Device Intelligence Verified (Physical Hardware Confirmed)", state="complete", expanded=False)
+                gate4_status.update(label="Gate 4: Device Intelligence Verified (Physical Hardware Confirmed)", state="complete", expanded=False)
 
         # ----------------------------------------------------
-        # 📡 [GATE 5] DECENTRALIZED DATA CROSS-VALIDATION
+        # [GATE 5] DECENTRALIZED DATA CROSS-VALIDATION
         # ----------------------------------------------------
-        with st.status("📡 [GATE 5] Running Decentralized Cross-Validation Registry Handshake...", expanded=True) as gate5_status:
+        with st.status("Core Processing: Running Gate 5 Decentralized Cross-Validation...", expanded=True) as gate5_status:
             st.write("Encrypting lookup variables using secure SHA-256 protocols...")
             time.sleep(1.0)
             st.write(f"Initiating remote query validation on centralized database node: {selected_id}...")
             time.sleep(1.5)
-            gate5_status.update(label="✅ Gate 5: Node Registry Cross-Validation Concluded", state="complete", expanded=False)
+            gate5_status.update(label="Gate 5: Node Registry Cross-Validation Concluded", state="complete", expanded=False)
 
         st.write("")
         
@@ -185,9 +185,9 @@ if uploaded_file is not None:
         if "REAL" in extracted_text.upper() or "REAL" in uploaded_file.name.upper():
             st.components.v1.html(fireworks_html, height=0)
             st.markdown(
-                f"""
+                f""
                 <div style="background: linear-gradient(135deg, rgba(30,41,59,0.9) 0%, rgba(6,78,59,0.95) 100%); backdrop-filter: blur(8px); padding:25px; border-radius:12px; border:2px solid #10b981; border-left:10px solid #10b981; color:#ecfdf5;">
-                    <h3 style="color:#10b981 !important; margin-top:0; font-family: monospace;">✅ [STATUS: ACCESS GRANTED]</h3>
+                    <h3 style="color:#10b981 !important; margin-top:0; font-family: monospace;">[STATUS: ACCESS GRANTED]</h3>
                     <p style="margin:5px 0;"><strong>Gate 2 Verdict:</strong> Passed. Text data cleanly extracted from document boundaries.</p>
                     <p style="margin:5px 0;"><strong>Gate 4 Verdict:</strong> Passed. Genuine physical video hardware frame confirmed.</p>
                     <p style="margin:5px 0;"><strong>Gate 5 Verdict:</strong> Passed. Encrypted identity record matched inside central ledger entry.</p>
@@ -196,7 +196,8 @@ if uploaded_file is not None:
             )
         else:
             st.markdown(
-                f""
+                f"""
                 <div style="background: linear-gradient(135deg, rgba(30,41,59,0.9) 0%, rgba(127,29,29,0.95) 100%); backdrop-filter: blur(8px); padding:25px; border-radius:12px; border:2px solid #ef4444; border-left:10px solid #ef4444; color:#fef2f2;">
-                    <h3 style="color:#ef4444 !important; margin-top:0; font-family: monospace;">🚨 [STATUS: SYNTHETIC FORGERY BLOCK]</h3>
+                    <h3 style="color:#ef4444 !important; margin-top:0; font-family: monospace;">[STATUS: SYNTHETIC FORGERY BLOCK]</h3>
                     <p style="margin:5px 0;"><strong>Gate 2 Verdict:</strong> Passed. Layout textual metrics scanned successfully.</p>
+                    <p style="margin:5px 0;"><strong>Gate 4 Verdict:</strong> Passed. Device environmental signals are secure.</p>
