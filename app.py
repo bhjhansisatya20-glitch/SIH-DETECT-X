@@ -196,7 +196,7 @@ if uploaded_file is not None:
             )
         else:
             st.markdown(
-                f"""
+                f""
                 <div style="background: linear-gradient(135deg, rgba(30,41,59,0.9) 0%, rgba(127,29,29,0.95) 100%); backdrop-filter: blur(8px); padding:25px; border-radius:12px; border:2px solid #ef4444; border-left:10px solid #ef4444; color:#fef2f2;">
                     <h3 style="color:#ef4444 !important; margin-top:0; font-family: monospace;">🚨 [STATUS: SYNTHETIC FORGERY BLOCK]</h3>
                     <p style="margin:5px 0;"><strong>Gate 2 Verdict:</strong> Passed. Layout textual metrics scanned successfully.</p>
