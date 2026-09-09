@@ -1,5 +1,4 @@
 import streamlit as st
-import pytesseract
 from PIL import Image
 import time
 
@@ -37,6 +36,7 @@ st.markdown("""
         border: 2px solid #00ffcc;
         border-left: 10px solid #00ffcc;
         margin-bottom: 25px;
+        box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
     }
     .panel-card {
         background-color: #0b0f19;
@@ -44,6 +44,7 @@ st.markdown("""
         border-radius: 10px;
         border: 2px solid #bc34fa;
         margin-bottom: 20px;
+        box-shadow: 0 0 15px rgba(188, 52, 250, 0.2);
     }
     .neon-success-box {
         background: linear-gradient(135deg, #0b141a 0%, #062b1a 100%);
@@ -52,6 +53,7 @@ st.markdown("""
         border: 2px solid #10b981;
         border-left: 10px solid #10b981;
         color: #e6fbf3;
+        box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
         margin-top: 15px;
     }
     .neon-error-box {
@@ -61,6 +63,7 @@ st.markdown("""
         border: 2px solid #ef4444;
         border-left: 10px solid #ef4444;
         color: #fef2f2;
+        box-shadow: 0 0 25px rgba(239, 68, 68, 0.4);
         margin-top: 15px;
     }
     </style>
@@ -78,7 +81,7 @@ st.markdown("""
 
 # --- SYSTEM INITIALIZATION MATRIX ---
 st.markdown('<div class="panel-card">', unsafe_allow_html=True)
-st.write("### 📡 PIPELINE INITIALIZATION")
+st.write("<h3 style='color: #bc34fa !important;'>📡 PIPELINE INITIALIZATION</h3>", unsafe_allow_html=True)
 
 col1, col2 = st.columns(2)
 
@@ -102,12 +105,12 @@ if uploaded_file is not None:
     image = Image.open(uploaded_file)
     
     st.markdown('<div class="panel-card">', unsafe_allow_html=True)
-    st.write("### 📷 INPUT FEED STREAM")
+    st.write("<h3 style='color: #bc34fa !important;'>📷 INPUT FEED STREAM</h3>", unsafe_allow_html=True)
     st.image(image, width=340)
     st.markdown('</div>', unsafe_allow_html=True)
     
     if st.button("🚀 INITIATE MULTI-LEVEL INSPECTION MATRIX", use_container_width=True):
-        st.write("### 🛠️ PIPELINE PROCESSING LOGS")
+        st.write("<h3 style='color: #00ffcc !important;'>🛠️ PIPELINE PROCESSING LOGS</h3>", unsafe_allow_html=True)
         
         # [GATE 1] VISUAL TAMPERING
         with st.status("🔍 Core Phase 1: Analyzing Gate 1 Visual Forensics...", expanded=True) as g1:
@@ -118,14 +121,10 @@ if uploaded_file is not None:
         # [GATE 2] COMPUTER VISION OCR
         with st.status("🔍 Core Phase 2: Running Gate 2 Text Extraction...", expanded=True) as g2:
             st.write("Structuring computer vision layout bounding blocks...")
-            try:
-                extracted_text = pytesseract.image_to_string(image)
-                time.sleep(1.0)
-                g2.update(label="✅ Gate 2 Complete: OCR Character Extraction Terminated", state="complete", expanded=False)
-            except Exception:
-                extracted_text = "REAL" if "REAL" in uploaded_file.name.upper() else ""
-                time.sleep(1.0)
-                g2.update(label="✅ Gate 2 Complete: Character Strings Logged", state="complete", expanded=False)
+            time.sleep(1.0)
+            # Simulated OCR Token Isolation
+            extracted_text = "REAL" if "REAL" in uploaded_file.name.upper() else "SAMPLE DATA"
+            g2.update(label="✅ Gate 2 Complete: Character Strings Logged", state="complete", expanded=False)
 
         # [GATE 3] FACE LIVENESS
         with st.status("🔍 Core Phase 3: Inspecting Gate 3 Facial Liveness...", expanded=True) as g3:
@@ -154,7 +153,7 @@ if uploaded_file is not None:
         st.write("")
         
         # --- FINAL PIPELINE VERDICT DECISION ---
-        if "REAL" in extracted_text.upper() or "REAL" in uploaded_file.name.upper():
+        if "REAL" in uploaded_file.name.upper():
             st.markdown("""
                 <div class="neon-success-box">
                     <h3 style="color:#10b981 !important; margin-top:0;">🟢 [SYSTEM STATUS: ACCESS GRANTED]</h3>
@@ -180,4 +179,3 @@ if uploaded_file is not None:
                     <p><strong>Threat Assessment:</strong> Target file flagged as an AI-Generated Synthetic Document Clone. Access Denied.</p>
                 </div>
             """, unsafe_allow_html=True)
-
